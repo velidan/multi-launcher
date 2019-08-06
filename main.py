@@ -94,7 +94,9 @@ class MultiLauncher(ui.MainWindow):
         self.fileRegistry[file_name] = file_path
 
     def removeFileGroup(self):
-        print("remove file group")
+
+        sending_button = self.sender()
+        print("remove file group {0}".format(sending_button.objectName()))
 
     def addFieldGroup(self):
         print("add file group")
