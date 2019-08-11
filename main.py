@@ -100,9 +100,13 @@ class MultiLauncher(ui.MainWindow):
         self.deleteInputRow(input_row_id)
 
     def addFieldGroup(self):
-        print("add file group")
-        print(self.createInputRow)
+        # createInputRow autoincrements the inputRowCounter to prepare it for next new row
+        # need to save current row counter to use it in assign handler methods.
+        # necessary to know what row ID we need to use to fetch proper buttons
+        created_row_id = self.inputRowCounter
         self.createInputRow(True)
+        self._addListenerToAddFileBtn(created_row_id)
+        self._addListenerToRemoveFileBtn(created_row_id)
 
     def saveConfig(self):
         print("save conf")
