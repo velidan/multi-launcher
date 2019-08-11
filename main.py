@@ -39,6 +39,7 @@ class MultiLauncher(ui.MainWindow):
                 self._addListenerToRemoveFileBtn(idx)
 
             self.buttonsRegistry["fileGroupButtons"][idx][self.btnAddPrefix + str(idx)].setText(clearedFileContent[idx])
+            self.addFileToRegistry("group_" + str(idx), clearedFileContent[idx])
             # self.assignHandlersToFileGroupBtns()
 
 
@@ -93,11 +94,16 @@ class MultiLauncher(ui.MainWindow):
     def addFileToRegistry(self, file_name, file_path):
         self.fileRegistry[file_name] = file_path
 
+    def removeFileFromRegistry(self, file_name):
+        self.fileRegistry.pop(file_name, None)
+
     def removeFileGroup(self):
         sending_button = self.sender()
         search_match = re.search("\d", sending_button.objectName())
         input_row_id = search_match.group()
         self.deleteInputRow(input_row_id)
+        # TODO: do something with this crazy naming. FIle group|files|key etc. Something semantic
+        self.removeFileFromRegistry("group_" + str(input_row_id))
 
     def addFieldGroup(self):
         # createInputRow autoincrements the inputRowCounter to prepare it for next new row
@@ -109,7 +115,7 @@ class MultiLauncher(ui.MainWindow):
         self._addListenerToRemoveFileBtn(created_row_id)
 
     def saveConfig(self):
-        print("save conf")
+        print("save conf {}".format(self.fileRegistry));
         with open('./config.ini', 'w') as file:
             #  json.dump(self.fileRegistry, file)
             for k, v in self.fileRegistry.items():
