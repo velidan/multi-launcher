@@ -94,9 +94,10 @@ class MultiLauncher(ui.MainWindow):
         self.fileRegistry[file_name] = file_path
 
     def removeFileGroup(self):
-
         sending_button = self.sender()
-        print("remove file group {0}".format(sending_button.objectName()))
+        search_match = re.search("\d", sending_button.objectName())
+        input_row_id = search_match.group()
+        self.deleteInputRow(input_row_id)
 
     def addFieldGroup(self):
         print("add file group")

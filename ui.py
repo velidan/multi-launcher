@@ -127,6 +127,7 @@ class BottomContentBlock(QWidget):
         self.parent = parent
         # assign to the parent the createInputRow method
         self.parent.createInputRow = self.createInputRow
+        self.parent.deleteInputRow = self.deleteInputRow
         print(parent)
         # base amount of the input rows. We can't delete a field if there are only 2 fields.
         #self.parent.inputRowsBaseAmount = 2
@@ -279,6 +280,37 @@ class BottomContentBlock(QWidget):
         self.parent.inputRowCounter += 1
 
         return inputLayout
+
+    def deleteInputRow(self, fieldId):
+        print("input grid {}".format(self.inputGrid.rowCount()))
+        print("fieldId {}".format(fieldId))
+        print("fieldId {}".format(fieldId))
+        h_box_layout = self.inputGrid.itemAtPosition(int(fieldId), 0)
+
+        add_btn_layout_item = h_box_layout.itemAt(0)
+        remove_btn_layout_item = h_box_layout.itemAt(1)
+
+        #h_box_layout.removeWidget(add_btn_layout_item.widget())
+        #h_box_layout.removeWidget(remove_btn_layout_item.widget())
+
+        # remove widgets
+        add_btn_widget = add_btn_layout_item.widget()
+        add_btn_widget.setParent(None)
+        add_btn_widget.deleteLater()
+
+        remove_btn_widget = remove_btn_layout_item.widget()
+        remove_btn_widget.setParent(None)
+        remove_btn_widget.deleteLater()
+
+        # remove a layout from the grid row
+        self.inputGrid.removeItem(h_box_layout)
+
+        # decrement row counter is necessary because QGrid can't remove it's row|column
+        # so after widget deletion we still have an 0-height empty row. So it means that new HBoxLayout
+        # must be inserted into this empty row. We don't want to create a new one till we have the empty row
+        self.parent.inputRowCounter -= 1
+        print("input grid {}".format(self.inputGrid.rowCount()))
+
 
 class ActionPanel(QWidget):
 
