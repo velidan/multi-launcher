@@ -67,7 +67,7 @@ class TopContentBlock(QWidget):
         self.img.setAlignment(Qt.AlignCenter)
 
 
-        pixmap = QPixmap('main_illustration.png')
+        pixmap = QPixmap(':img/main_illustration.png')
         # self.img.setPixmap(pixmap)
         self.img.setPixmap(pixmap)
         print(pixmap.width(), pixmap.height())

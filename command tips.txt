@@ -1,0 +1,2 @@
+Compile q resource file to py:  pyrcc5 img.qrc -o img.py
+Make an single exe file without terminal to run:  pyinstaller -F -w <file_path>
