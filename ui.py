@@ -329,7 +329,6 @@ class ActionPanel(QWidget):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.addFileGroupBtn.sizePolicy().hasHeightForWidth())
         self.addFileGroupBtn.setSizePolicy(sizePolicy)
-        self.addFileGroupBtn.setMinimumHeight(32)
         font = QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(14)
@@ -343,6 +342,8 @@ class ActionPanel(QWidget):
                     color: #9FB9B9;
                     border: 2px dashed #EFF3F4;
                     margin-bottom: 34px;
+                    height: 32px;
+                    min-height:  32px;
                 """)
 
         icon = QIcon()
